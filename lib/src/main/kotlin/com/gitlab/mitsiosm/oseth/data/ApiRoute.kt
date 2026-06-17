@@ -13,5 +13,5 @@ internal data class ApiRoute(
     internal val statusCode: UInt
     ) {
     @Serializable
-    internal data class ApiRouteData(internal val routes: List<Route>, internal val total: ULong);
+    internal data class ApiRouteData(internal val routes: List<Route>, internal val total: ULong)
 }

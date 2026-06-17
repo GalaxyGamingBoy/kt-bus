@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 
 class OsethTest {
-    lateinit var library: Oseth;
+    lateinit var library: Oseth
 
     @BeforeEach
     fun setUp() {
@@ -15,7 +15,7 @@ class OsethTest {
 
     @Test
     fun `ensure getRoutes returns`() = runTest { 
-        val routes = library.getRoutes();
+        val routes = library.getRoutes()
         
         assertTrue(routes.isSuccess)
         assertTrue(routes.getOrThrow().isNotEmpty())
@@ -23,7 +23,7 @@ class OsethTest {
     
     @Test
     fun `ensure getRoutes followsSize`() = runTest {
-        val routes = library.getRoutes(size = 10u);
+        val routes = library.getRoutes(size = 10u)
         
         assertTrue(routes.isSuccess)
         assertTrue(routes.getOrThrow().isNotEmpty())
@@ -32,8 +32,8 @@ class OsethTest {
     
     @Test
     fun `ensure getRoutes followsPage`() = runTest {
-        val routesPage1 = library.getRoutes(size = 10u, page = 1u);
-        val routesPage2 = library.getRoutes(size = 20u, page = 2u);
+        val routesPage1 = library.getRoutes(size = 10u, page = 1u)
+        val routesPage2 = library.getRoutes(size = 20u, page = 2u)
         
         assertTrue(routesPage1.isSuccess)
         assertTrue(routesPage1.getOrThrow().isNotEmpty())
@@ -45,13 +45,13 @@ class OsethTest {
 
     @Test
     fun `ensure getRoutes errorIfNoSize`() = runTest {
-        val routes = library.getRoutes(size = 0u);
+        val routes = library.getRoutes(size = 0u)
         assertTrue(routes.isFailure)
     }
     
     @Test
     fun `ensure getRoutes errorIfNoPage`() = runTest {
-        val routes = library.getRoutes(page = 0u);
+        val routes = library.getRoutes(page = 0u)
         assertTrue(routes.isFailure)
     }
 }
