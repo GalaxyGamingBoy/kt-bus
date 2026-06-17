@@ -27,13 +27,13 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:3.5.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.0")
     implementation("io.ktor:ktor-client-logging:3.5.0")
-    implementation("ch.qos.logback:logback-classic:1.5.34")
     
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
     
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0")
+    testImplementation("ch.qos.logback:logback-classic:1.5.34")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

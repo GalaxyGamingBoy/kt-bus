@@ -1,5 +1,7 @@
 package com.gitlab.mitsiosm.oseth
 
+import com.gitlab.mitsiosm.oseth.data.Language
+import com.gitlab.mitsiosm.oseth.data.Route
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -11,6 +13,11 @@ class OsethTest {
     @BeforeEach
     fun setUp() {
         library = Oseth()
+    }
+    
+    suspend fun getRoute(): Route {
+        val routes = library.getRoutes(1u, 1u).getOrThrow()
+        return routes.first()
     }
 
     @Test
@@ -53,5 +60,26 @@ class OsethTest {
     fun `ensure getRoutes errorIfNoPage`() = runTest {
         val routes = library.getRoutes(page = 0u)
         assertTrue(routes.isFailure)
+    }
+    
+    @Test
+    fun `ensure getRouteInfo returns`() = runTest {
+        val route = getRoute()
+        val info = library.getRouteInfo(route.id, route.tripHeadsigns[0].shapeId)
+        
+        assertTrue(info.isSuccess)
+    }
+    
+    @Test
+    fun `ensure getRouteInfo followsLanguage`() = runTest {
+        val route = getRoute()
+        
+        val infoGr = library.getRouteInfo(route.id, route.tripHeadsigns[0].shapeId, Language.GREEK)
+        val infoEn = library.getRouteInfo(route.id, route.tripHeadsigns[0].shapeId, Language.ENGLISH)
+        
+        assertTrue(infoGr.isSuccess)
+        assertTrue(infoEn.isSuccess)
+        
+        assertTrue(infoGr.getOrThrow().headsign != infoEn.getOrThrow().headsign)
     }
 }
