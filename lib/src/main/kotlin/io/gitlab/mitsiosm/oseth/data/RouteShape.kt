@@ -1,0 +1,13 @@
+package io.gitlab.mitsiosm.oseth.data
+
+import kotlinx.serialization.Serializable
+
+/**
+ * The GeoShape of a route
+ */
+@Serializable
+public data class RouteShape(
+    public val id: ShapeId,
+    public val color: String,
+    public val lineString: String,
+)
