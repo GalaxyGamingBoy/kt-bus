@@ -3,9 +3,13 @@ package com.gitlab.mitsiosm.oseth
 import com.gitlab.mitsiosm.oseth.data.Language
 import com.gitlab.mitsiosm.oseth.data.Route
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
+import kotlinx.datetime.todayIn
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
+import kotlin.time.Clock
 
 class OsethTest {
     lateinit var library: Oseth
@@ -81,5 +85,40 @@ class OsethTest {
         assertTrue(infoEn.isSuccess)
         
         assertTrue(infoGr.getOrThrow().headsign != infoEn.getOrThrow().headsign)
+    }
+    
+    @Test
+    fun `ensure getTimetable returns`() = runTest {
+        val route = getRoute()
+
+        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val midnight = today.atStartOfDayIn(TimeZone.currentSystemDefault())
+        
+        val timetable = library.getTimetable(route.id, route.tripHeadsigns[0].shapeId, midnight, Language.GREEK)
+        
+        assertTrue(timetable.isSuccess)
+    }
+    
+    @Test
+    fun `ensure getTimetable followsLanguage`() = runTest {
+        val route = getRoute()
+        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val midnight = today.atStartOfDayIn(TimeZone.currentSystemDefault())
+
+        val timetableGr = library.getTimetable(route.id, route.tripHeadsigns[0].shapeId, midnight, Language.GREEK)
+        val timetableEn = library.getTimetable(route.id, route.tripHeadsigns[0].shapeId, midnight, Language.ENGLISH)
+        
+        assertTrue(timetableGr.isSuccess)
+        assertTrue(timetableEn.isSuccess)
+        
+        assertTrue(timetableGr.getOrThrow().headsign != timetableEn.getOrThrow().headsign)
+    }
+    
+    @Test
+    fun `ensure getTimetableForToday returns`() = runTest {
+        val route = getRoute()
+        val timetable = library.getTimetableForToday(route.id, route.tripHeadsigns[0].shapeId, Language.GREEK)
+        
+        assertTrue(timetable.isSuccess)
     }
 }

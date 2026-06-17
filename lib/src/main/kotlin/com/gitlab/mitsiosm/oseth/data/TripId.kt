@@ -3,8 +3,8 @@ package com.gitlab.mitsiosm.oseth.data
 import kotlinx.serialization.Serializable
 
 /**
- * @param value Color
+ * @param value Trip identifier
  */
 @JvmInline
 @Serializable
-public value class Color(public val value: String)
+public value class TripId(public val value: String)

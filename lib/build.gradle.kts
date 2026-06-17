@@ -29,6 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-client-logging:3.5.0")
     
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
+    api("org.jetbrains.kotlinx:kotlinx-datetime:0.8.0")
     
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)

@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class RouteShape(
     public val id: ShapeId,
-    public val color: Color,
+    public val color: String,
     public val lineString: String,
 )
