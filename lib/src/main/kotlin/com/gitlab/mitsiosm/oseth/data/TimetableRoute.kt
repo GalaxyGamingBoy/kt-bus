@@ -2,6 +2,9 @@ package com.gitlab.mitsiosm.oseth.data
 
 import kotlinx.serialization.Serializable
 
+/**
+ * A route in the timetable
+ */
 @Serializable
 public data class TimetableRoute(
     public val id: RouteId,

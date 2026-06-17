@@ -3,7 +3,7 @@ package com.gitlab.mitsiosm.oseth.data
 import kotlinx.serialization.Serializable
 
 /**
- * A route stop
+ * A route stop in the timetable
  */
 @Serializable
 public data class TimetableStop(

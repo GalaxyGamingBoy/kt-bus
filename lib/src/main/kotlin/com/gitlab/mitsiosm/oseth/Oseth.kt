@@ -59,6 +59,10 @@ public class Oseth {
 
     /**
      * Fetch detailed information regarding a route and shape
+     * 
+     * @param routeId The route to get the information from
+     * @param shapeId The route shape to get the information from
+     * @param language The language to get the information in
      */
     public suspend fun getRouteInfo(routeId: RouteId, shapeId: ShapeId, language: Language = Language.GREEK): Result<DetailedRoute> {
         try {
@@ -72,6 +76,11 @@ public class Oseth {
 
     /**
      * Fetch the timetable for a route and shape
+     * 
+     * @param routeId The route to get the information from
+     * @param shapeId The route shape to get the information from
+     * @param from The instant to get the timetable from - Accounts for 24h
+     * @param language The language to get the information in
      */
     public suspend fun getTimetable(routeId: RouteId, shapeId: ShapeId, from: Instant, language: Language = Language.GREEK): Result<Timetable> {
         try {
@@ -86,6 +95,11 @@ public class Oseth {
 
     /**
      * Fetch the timetable for today
+     * 
+     * @param routeId The route to get the information from
+     * @param shapeId The route shape to get the information from
+     * @param language The language to get the information in
+     * @param timezone The timezone to use that specifies the day
      */
     public suspend fun getTimetableForToday(routeId: RouteId, shapeId: ShapeId, language: Language = Language.GREEK, timezone: TimeZone = TimeZone.currentSystemDefault()): Result<Timetable> {
         val today = Clock.System.todayIn(timezone)

@@ -4,8 +4,11 @@ import kotlinx.datetime.LocalTime
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
+/**
+ * A timetable trip
+ */
 @Serializable
-public data class Trip(
+public data class TimetableTrip(
     public val id: TripId,
     public val headsign: String,
     public val shapeId: ShapeId,
