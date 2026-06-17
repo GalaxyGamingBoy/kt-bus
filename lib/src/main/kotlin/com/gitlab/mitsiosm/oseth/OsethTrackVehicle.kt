@@ -1,7 +1,6 @@
 package com.gitlab.mitsiosm.oseth
 
 import com.gitlab.mitsiosm.oseth.data.Coordinates
-import com.gitlab.mitsiosm.oseth.data.Language
 import com.gitlab.mitsiosm.oseth.data.RouteId
 import com.gitlab.mitsiosm.oseth.data.ShapeId
 import kotlinx.coroutines.CoroutineScope
@@ -50,7 +49,7 @@ public class OsethTrackVehicle(public val routeId: RouteId,
     
     private suspend fun track() {
         val info = oseth.getRouteInfo(routeId, shapeId)
-        if (info.isFailure) return;
+        if (info.isFailure) return
         val vehicles = info.getOrThrow().vehicles.map { Coordinates(it.latitude, it.longitude) }
         channel.send(vehicles)
     }

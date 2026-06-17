@@ -25,7 +25,7 @@ class OsethTrackVehicleTest {
         val route = getRoute()
         val tracker = OsethTrackVehicle(route.id, route.tripHeadsigns[0].shapeId)
 
-        var index: Int = 0
+        var index = 0
         launch { 
             for (gps in tracker.channel) {
                 if (index == 4) 
