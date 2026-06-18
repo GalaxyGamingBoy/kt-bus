@@ -121,4 +121,12 @@ class OsethTest {
         
         assertTrue(timetable.isSuccess)
     }
+    
+    @Test
+    fun `ensure getCurrentShapeId returns`() = runTest { 
+        val route = getRoute()
+        val shapeId = library.getCurrentShapeId(route.id)
+        
+        assertTrue(shapeId.isSuccess)
+    }
 }

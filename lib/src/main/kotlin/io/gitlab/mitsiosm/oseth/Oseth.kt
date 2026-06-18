@@ -6,6 +6,7 @@ import io.gitlab.mitsiosm.oseth.data.ApiTimetable
 import io.gitlab.mitsiosm.oseth.data.Language
 import io.gitlab.mitsiosm.oseth.data.RouteId
 import io.gitlab.mitsiosm.oseth.data.DetailedRoute
+import io.gitlab.mitsiosm.oseth.data.Route
 import io.gitlab.mitsiosm.oseth.data.ShapeId
 import io.gitlab.mitsiosm.oseth.data.Timetable
 import io.ktor.client.HttpClient
@@ -47,7 +48,7 @@ public class Oseth {
      * @param size How many routes to fetch
      * @param page Which page to fetch
      */
-    public suspend fun getRoutes(size: UInt = 1000u, page: UInt = 1u): Result<List<io.gitlab.mitsiosm.oseth.data.Route>> {
+    public suspend fun getRoutes(size: UInt = 1000u, page: UInt = 1u): Result<List<Route>> {
         try {
             val routes: ApiRoute = client.get(TelematicsApi.Routes(size = size, page = page)).body()
             return Result.success(routes.data.routes.toList())
@@ -104,5 +105,27 @@ public class Oseth {
         val today = Clock.System.todayIn(timezone)
         val midnight = today.atStartOfDayIn(timezone)
         return getTimetable(routeId, shapeId, midnight, language)
+    }
+
+    /**
+     * Fetches the current shape id of a route
+     * 
+     * @param routeId The route to get the information from
+     */
+    public suspend fun getCurrentShapeId(routeId: RouteId): Result<ShapeId> {
+        val routes = getRoutes()
+        if (routes.isFailure) {
+            val exception = routes.exceptionOrNull()
+            return Result.failure(exception!!)
+        }
+        
+        val route = routes.getOrThrow().find {
+            it.id == routeId
+        }!!
+        
+        val headsigns = route.tripHeadsigns
+        val headsign = headsigns.find { it.headsign == route.longName }!!
+        
+        return Result.success(headsign.shapeId)
     }
 }
