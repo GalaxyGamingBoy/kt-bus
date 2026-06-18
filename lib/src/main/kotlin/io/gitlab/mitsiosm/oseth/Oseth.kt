@@ -25,7 +25,7 @@ import kotlin.time.Clock
 import kotlin.time.Instant
 
 /**
- * OSETH API Call Instance 
+ * API Call Instance 
  */
 public class Oseth {
     private val client = HttpClient(CIO) {
