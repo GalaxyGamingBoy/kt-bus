@@ -2,13 +2,12 @@
 # https://docs.gradle.org/current/userguide/version_catalogs.html#sec::toml-dependencies-format
 
 [versions]
-junit-jupiter = "5.10.2"
 agp = "8.13.2"
 kotlin = "2.2.20"
 android-minSdk = "28"
 android-compileSdk = "35"
 vanniktechMavenPublish = "0.36.0"
-ktor = "3.5.0"
+ktor = "3.3.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

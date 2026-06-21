@@ -69,29 +69,29 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation("io.ktor:ktor-client-core:3.3.3")
-            implementation("io.ktor:ktor-client-resources:3.3.3")
-            implementation("io.ktor:ktor-client-content-negotiation:3.3.3")
-            implementation("io.ktor:ktor-serialization-kotlinx-json:3.3.3")
-            implementation("io.ktor:ktor-client-logging:3.3.3")
+            implementation("io.ktor:ktor-client-core:${libs.versions.ktor}")
+            implementation("io.ktor:ktor-client-resources:${libs.versions.ktor}")
+            implementation("io.ktor:ktor-client-content-negotiation:${libs.versions.ktor}")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:${libs.versions.ktor}")
+            implementation("io.ktor:ktor-client-logging:${libs.versions.ktor}")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.8.0")
         }
         
         jvmMain.dependencies {
-            implementation("io.ktor:ktor-client-cio:3.3.3")
+            implementation("io.ktor:ktor-client-cio:${libs.versions.ktor}")
         }
         
         androidMain.dependencies {
-            implementation("io.ktor:ktor-client-android:3.3.3")
+            implementation("io.ktor:ktor-client-android:${libs.versions.ktor}")
         }
         
         appleMain.dependencies {
-            implementation("io.ktor:ktor-client-darwin:3.3.3")
+            implementation("io.ktor:ktor-client-darwin:${libs.versions.ktor}")
         }
         
         linuxMain.dependencies {
-            implementation("io.ktor:ktor-client-curl:3.3.3")
+            implementation("io.ktor:ktor-client-curl:${libs.versions.ktor}")
         }
 
         commonTest.dependencies {
